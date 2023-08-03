@@ -18,7 +18,7 @@ int main(void){
     PA0_Init();
     lcd_send_str("Hello World!!");
     lcd_set_cursor(2,1);
-     lcd_send_str("Welcll Done!!");
+     lcd_send_str("Well Done!!");
     SysTick_Init(1000,EXC_ENABLE,MILLI_SECOND);
     
     
