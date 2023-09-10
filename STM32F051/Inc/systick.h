@@ -11,8 +11,8 @@
 #include "core.h"
 #include "stm32f0xx.h"
 
-#define MS_DELAY          1000
-#define US_DELAY          1
+#define MS_DELAY          8000
+#define US_DELAY          8
 #define EXC_ENABLE        ENABLE
 #define EXC_DISABLE       DISABLE
 

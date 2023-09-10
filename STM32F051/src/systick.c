@@ -10,8 +10,8 @@
 
 static void pollflag(void){
 	 while (!(SysTick->CSR&SYSTICK_CSR_COUNTFLAG)); //Wait until flag is set
-	 SysTick->CSR &= SYSTICK_CSR_EN; //Enable Counter
-	 SysTick->CSR &=  SYSTICK_PROCESSOR_CLK;
+	 SysTick->CSR &= ~SYSTICK_CSR_EN; //Enable Counter
+	 SysTick->CSR &=  ~SYSTICK_PROCESSOR_CLK;
 
 }
 
