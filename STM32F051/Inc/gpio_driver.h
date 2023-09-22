@@ -55,7 +55,7 @@ typedef enum{
  */
 typedef struct{
 	uint8_t PinNumber;              //see  @GPIOx Pin Numbers
-    GPIO_MODE_t PinMode;            //see  @GPIO Possible Modes
+        GPIO_MODE_t PinMode;            //see  @GPIO Possible Modes
 	uint8_t OutPutType;
 	uint8_t PinSpeed;
 	GPIO_PUPD_t PullUpPullDown;     //see  @GPIOx Pull up pull down Enum
@@ -89,9 +89,9 @@ typedef struct{
 #define HIGHSPEED                       0x03
 
 /*
- * Falling, Rising edge Trigger Macros
+ * Interrupt Edge Trigger possible configurations
  */
-#define 	FT_INTERRUPT                0x00
+#define     FT_INTERRUPT                0x00
 #define     RT_INTERRUPT                0x01
 #define     FRT_INTERRUPT               0x02
 

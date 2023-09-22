@@ -530,5 +530,5 @@ typedef struct{
 #define DISABLE       0x00
 #define PIN_SET       ENABLE
 #define PIN_RESET     DISABLE
-#include "gpio.h"
+#include "gpio_driver.h"
 #endif /* STM32F051XX_H_ */

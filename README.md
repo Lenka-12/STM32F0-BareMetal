@@ -58,25 +58,7 @@ Before you start, ensure you have the following tools installed on your system:
 
 1. Go to the project folder containing the Makefile.
 2. Open that folder in the terminal.
-3. Type `make`.
-4. If there are no errors, type the command: `make load`.
-5. Open a new terminal/command prompt window in the same folder as .elf file
-
-## Flashing using GDB 
-6. Type `arm-none-eabi-gdb`.
-7. Enter the command: `target extended-remote localhost:3333` (the port number will be visible in the message you get after `make load`).
-8. Enter: `monitor reset init`.
-9. Enter: `monitor flash write_image erase final.elf`.
-10. Enter: `monitor reset halt`.
-11. Enter: `monitor resume`.
-
-## Flashing using telnet on Linux
-Open new terminal window in the same folder as .elf file
-1. Enter: `telnet localhost 6666`.
-2. Enter: `reset init`.
-3. Enter: `flash write_image erase final.elf`.
-4. Enter: `reset halt`.
-5. Enter: `resume`.
+3. Type `make flash`.
 
 ## For UCT Devboard
 

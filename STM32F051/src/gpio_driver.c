@@ -5,7 +5,7 @@
  *      Author: Malefetsane Lenka
  */
 
-#include "gpio.h"
+#include "gpio_driver.h"
 #include "syscfg.h"
 #include  "core.h"
 
