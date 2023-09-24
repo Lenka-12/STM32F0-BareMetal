@@ -39,6 +39,6 @@ clean:
 	rm  -rf *.o *.elf
 
 flash:  all
-	openocd -f interface/stlink.cfg  -f target/stm32f4x.cfg -c "program $(TARGET) verify reset exit"
+	openocd -f interface/stlink.cfg  -f target/stm32f0x.cfg -c "program $(TARGET) verify reset exit"
 load:
-	openocd -f interface/stlink.cfg  -f target/stm32f4x.cfg 
+	openocd -f interface/stlink.cfg  -f target/stm32f0x.cfg 

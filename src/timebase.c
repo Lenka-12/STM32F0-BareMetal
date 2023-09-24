@@ -8,7 +8,7 @@
 #include "stm32f0xx.h"
 #include "timebase.h"
 
-#define MILLI_SEC_LOAD   16000
+#define MILLI_SEC_LOAD   8000
 #define MAX_DELAY        0xFFFFFFFF
 
 volatile uint32_t g_curr_tick;

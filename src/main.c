@@ -8,11 +8,13 @@
 #include <stdint.h>
 #include "gpio_driver.h"
 #include "timebase.h"
+#include "lcd_driver.h"
 
 
 int main(void){
 	GPIO_Handle_t led0;
-	GPIO_ClockConfig(GPIOB, ENABLE);
+	timebase_init();
+	lcd_init();
 	led0.GPIOx = GPIOB;
 
 	led0.GPIOx_Cofig.GPIO_OPType = PushPull;
@@ -25,7 +27,11 @@ int main(void){
 	led0.GPIOx_Cofig.GPIO_PullUpPullDown_Ctrl = NoPullUpOrPullDown;
 
 	GPIO_Init(&led0);
-	timebase_init();
+
+
+	lcd_print_string("Hello World!!");
+	lcd_set_cursor(2, 1);
+	lcd_print_string("Welcome");
 
 	while(1){
 		GPIO_TogglePin(GPIOB, GPIO_PIN_0);
@@ -34,3 +40,6 @@ int main(void){
 
 
 }
+
+
+

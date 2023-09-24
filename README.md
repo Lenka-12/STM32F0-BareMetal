@@ -66,10 +66,8 @@ Before you start, ensure you have the following tools installed on your system:
 - You will see the message on the LCD screen:
   ```
   "Hello World!!"
-  "Well Done!!"
+  "Welcome!"
   ```
-- Press SW0, and led1 will turn on.
-
 ## References
 ### Openocd
 https://openocd.org/doc/pdf/openocd.pdf
