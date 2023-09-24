@@ -1,8 +1,0 @@
-#Ignore object files
-*.o 
-
-#Ignore executable file
-*.elf
-
-#Ignore map file 
-*.map
