@@ -1,44 +1,49 @@
 CC = arm-none-eabi-gcc
 MACH = cortex-m0
 
-CFLAGS = -c -mcpu=$(MACH) -mthumb -mfloat-abi=soft -std=gnu11 -Wall -O0
-LDFLAGS= -mcpu=$(MACH) -mthumb  -mfloat-abi=soft --specs=nano.specs -T $(LS) -Wl,-Map=final.map
-#LDFLAGS_SH= -mcpu=$(MACH) -mthumb  -mfloat-abi=soft --specs=rdimon.specs -T stm32_ls.ld -Wl,-Map=final.map
-INCLUDES = $(addprefix -I, $(include_dirs))  # Add -I before each include directory
-OBJOPTIONS = arm-none-eabi-objcopy -O binary -S
-OBJHEX = arm-none-eabi-objcopy -O ihex 
-include_dirs = . Inc
-vpath %.c src/ Inc/
-vpath %.h src/ Inc/
+CFLAGS = -mcpu=$(MACH) -mthumb -mfloat-abi=soft -std=gnu11 -Wall -O0
+LDFLAGS = -mcpu=$(MACH) -mthumb -mfloat-abi=soft --specs=nano.specs -T $(LS) -Wl,-Map=final.map
+INCLUDES = $(addprefix -I, $(include_dirs))
+OBJOPTIONS = arm-none-eabi-objcopy -O binary
+include_dirs = include
+VPATH = $(SRCDIRS)
+# Directories
+SRCDIRS = example src
+BUILDDIR = build
+BINDIR  = binaries
 
+# Source files from each source directory
+SOURCES = $(foreach dir, $(SRCDIRS), $(wildcard $(dir)/*.c))
 
-SRCS = $(shell ls src/*.c)
-LS   = $(shell ls src/*.ld) 
-OBJS = $(notdir $(SRCS:.c=.o))
-DEPS = $(notdir SRCS:.c=.d)
-TARGET = final.elf
-BINARY = final.bin
-HEX    = final.hex
+# Object files
+OBJS = $(patsubst %.c,$(BUILDDIR)/%.o,$(notdir $(SOURCES)))
 
--include $(DEPS)
-.PHONY: all
-all: $(BINARY)
+# Linker Script
+LS = $(wildcard $(BUILDDIR)/*.ld)
+
+TARGET = $(BINDIR)/final.elf
+BINARY = $(BINDIR)/final.bin
+
+.PHONY: all clean flash load
+
+all: $(BINDIR) $(BINARY)
+$(BINDIR):
+	mkdir -p $@
 $(BINARY): $(TARGET)
-	$(OBJOPTIONS) $^ $@
-hex: $(HEX)
-$(HEX): $(TARGET)
-	$(OBJHEX) $^ $@	
-	
+	$(OBJOPTIONS) $< $@
+
 $(TARGET): $(OBJS)
-	$(CC) $(LDFLAGS)  $(OBJS) -o $(TARGET)  
+	$(CC) $(LDFLAGS) $^ -o $@
 
-$(OBJS): %.o: %.c
-	$(CC) $(CFLAGS) $(INCLUDES) -o $@ $^
-.PHONY: clean
+# No directory creation here
+$(BUILDDIR)/%.o: %.c
+	$(CC) -c $(CFLAGS) $(INCLUDES) -o $@ $<
+
 clean:
-	rm  -rf *.o *.elf
+	rm -rf $(BINARY) $(TARGET) $(OBJS)
 
-flash:  all
-	openocd -f interface/stlink.cfg  -f target/stm32f0x.cfg -c "program $(TARGET) verify reset exit"
+flash: all
+	openocd -f interface/stlink-v2.cfg -f target/stm32f4x.cfg -c "program $(TARGET) verify reset exit"
+
 load:
 	openocd -f interface/stlink.cfg  -f target/stm32f0x.cfg 
