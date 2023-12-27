@@ -10,7 +10,7 @@ ENTRY(Reset_Handler)
 MEMORY
 {
     FLASH(rx) : ORIGIN = 0x08000000, LENGTH = 32K
-    SRAM(rwx) : ORIGIN = 0x20000000, LENGTH = 4K
+    SRAM(rwx) : ORIGIN = 0x20000000, LENGTH = 8K
 }
 /*Location  counter always tracks VMA!!, ie .*/
 SECTIONS
